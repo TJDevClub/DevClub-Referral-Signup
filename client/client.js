@@ -1,10 +1,11 @@
 Students = new Meteor.Collection('students');
 Alerts = new Meteor.Collection(null);
-
+Confirmation = new Meteor.Collection('confirmation');
 
 studentsSub = Meteor.subscribe('students');
-var emailReg = /.*\@tjhsst\.edu$/i;
+confirmationSub = Meteor.subscribe('confirmation');
 
+var emailReg = /.*\@tjhsst\.edu$/i;
 
 Template.register.events = {
     'click input[type=submit]': function(event) {
@@ -25,20 +26,24 @@ Template.register.events = {
         var referralCode =  $('#referralCode').val() || null;
         var inviteCode =  result;
 
-        if(!emailReg.test(email) || Students.findOne({email:email}) !== undefined)
+        if(!emailReg.test(email) || Students.findOne({email:email}) !== undefined || Confirmation.findOne({email:email}) !== undefined/*So someone being confirmed doesn't get more emails*/)
             alert("Please use a valid, unused email")
         else if (!firstName || !lastName) {
             alert('Please fill in all fields');//we need a prettier way to send alerts
         } else {
-            alert('Your invite code is' + inviteCode);
-            Students.insert({
+            alert('Your invite code is ' + inviteCode);
+            Confirmation.insert({
                 created_at: new Date,
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 referralCode: referralCode,
                 inviteCode: inviteCode
+            }, function(){
+                console.log('done');
+                Router.go('home');
             });
+
         }
     }
 };

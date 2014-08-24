@@ -4,9 +4,8 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-autopublish
-insecure
 accounts-base
 iron-router
 bootstrap-3
 houston
+email
