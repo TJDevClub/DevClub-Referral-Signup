@@ -54,7 +54,7 @@ Template.login.events = {
             if (error) {
                 alert(error.reason + 'error');
             } else {
-                Router.go('/mynotes');
+                Router.go('/');
                 alert('You are now logged in.');
             }
         });

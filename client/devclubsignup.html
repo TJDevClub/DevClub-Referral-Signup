@@ -6,7 +6,8 @@
 
 <template name="layout">
     <div class="container">
-        {{> header}} {{> yield}}
+        {{> header}}
+        {{> yield}}
     </div>
 </template>
 
@@ -18,19 +19,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" title="Facti">
+            <a class="navbar-brand" href="{{pathFor 'home'}}" title="Facti">
                 Dev Club Signups
             </a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav navbar-right">
-                {{#if isLoggedIn}}
+                <!--{{#if isLoggedIn}}//we really shouldn't need to log in
                     <p class="navbar-text">Authorized as {{currentUser.username}}</p>
                     <li><a href="/" class="log-out">Log Out</a></li>
                 {{else}}
                     <li><a href="{{pathFor 'login'}}">Log In</a></li>
                     <li><a href="{{pathFor 'register'}}">Register</a></li>
-                {{/if}}
+                {{/if}}-->
+                <li><a href="{{pathFor 'home'}}">Home</a></li>
+                <li><a href="{{pathFor 'register'}}">Register</a></li>
+
             </ul>
         </div>
     </div>
