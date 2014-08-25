@@ -2,141 +2,135 @@
   <title>devclubsignup</title>
 </head>
 
+
+
 <template name="layout">
-	<div class="container">
-		{{> header}}
-		{{> yield}}
-	</div>
+    <div class="container">
+        {{> header}}
+        {{> yield}}
+    </div>
 </template>
 
 <template name="header">
-	<div class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="{{pathFor 'home'}}" title="Facti">
-				Dev Club Signups
-			</a>
-		</div>
-		<div class="navbar-collapse collapse navbar-responsive-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{{pathFor 'home'}}">Home</a></li>
-				{{#if isLoggedIn}}
-					<p class="navbar-text">Logged in as {{email}}</p>
-					<p class="navbar-text">Your code: <b id="code">{{code}}</b></p>
-					<li><a href="/" class="log-out">Log Out</a></li>
-				{{else}}
-					<li><a href="{{pathFor 'login'}}">Log In</a></li>
-					<li><a href="{{pathFor 'register'}}">Register</a></li>
-				{{/if}}
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{pathFor 'home'}}" title="Facti">
+                Dev Club Signups
+            </a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{pathFor 'home'}}">Home</a></li>
+                {{#if isLoggedIn}}
+                    <li><p class="navbar-text">Logged in as {{email}}</p></li>
+                    <li><p class="navbar-text">Your code: <b id="code">{{code}}</b></p></li>
+                    <li><p class="navbar-text">Your score: <b id="score">{{score}}</b></p></li>
+                    <li><a href="/" class="log-out">Log Out</a></li>
+                {{else}}
+                    <li><a href="{{pathFor 'login'}}">Log In</a></li>
+                    <li><a href="{{pathFor 'register'}}">Register</a></li>
+                {{/if}}
 
-			</ul>
-		</div>
-	</div>
+            </ul>
+        </div>
+    </div>
 </template>
 
 
 <template name="home">
 	<p>Dev Club Registration!</p>
-	<!-- Top register people -->
-    
+    <!-- Top register people -->
 </template>
 
 <template name="register">
-	{{#if currentUser}}
-		<p>You're already logged in!</p>
-	{{else}}
-		  <div class="row centered-form">
-			<div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-							<h3 class="panel-title">Register for DevClub</h3>
-							</div>
-							<div class="panel-body">
-							<form role="form">
-								<div class="row">
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
-										</div>
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-										</div>
-									</div>
-								</div>
+	  <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Register for DevClub</h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form role="form">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+			    					</div>
+			    				</div>
+			    			</div>
 
-								<div class="row">
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
-										</div>
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
-										</div>
-									</div>
-								</div>
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+        			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+			    					</div>
+			    				</div>
+			    			</div>
 
-								<div class="form-group">
-									<input type="text" name="referralCode" id="referralCode" class="form-control input-sm" placeholder="Referrral Code">
-								</div>
-
-								<input type="submit" value="Register" class="btn btn-info btn-block">
-
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-	{{/if}}
+                            <div class="form-group">
+                                <input type="text" name="referralCode" id="referralCode" class="form-control input-sm" placeholder="Referrral Code">
+                            </div>
+			    			
+			    			<input type="submit" value="Register" class="btn btn-info btn-block">
+			    		
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
 </template>
 
 <template name="login">
-	{{#if currentUser}}
-		<p>You're already logged in!</p>
-	{{else}}
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Please sign in</h3>
-					</div>
-					<div class="panel-body">
-						<form accept-charset="UTF-8" role="form">
-							<fieldset>
-								<div class="form-group">
-									<input class="form-control" placeholder="TJ Email" name="email" id="email" type="text">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Password" name="password" type="password" id="password" value="">
-								</div>
-								<input class="btn btn-lg btn-success btn-block" type="submit" value="Log In">
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	{{/if}}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please sign in</h3>
+                </div>
+                <div class="panel-body">
+                    <form accept-charset="UTF-8" role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="TJ Email" name="email" id="email" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" id="password" value="">
+                            </div>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Log In">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="loading">
-	<p>Loading</p>
+    <p>Loading</p>
 </template>
 
 <template name="complete">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<div class="panel">
-				<p>Email verified!</p>
-				<input class="btn btn-lg btn-success btn-block" type="submit" value="Login" onclick="Router.go('login');">
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel">
+                <p>Email verified!</p>
+                <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" onclick="Router.go('login');">
+            </div>
+        </div>
+    </div>
 </template>
