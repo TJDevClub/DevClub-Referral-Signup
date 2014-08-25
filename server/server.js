@@ -25,6 +25,16 @@ Meteor.startup(function() {
 //     });
 // });
 
+function confirmationMessage(id){
+    return "Hello!\n"
+    + "Please visit "
+    + process.env.ROOT_URL
+    + "verify/"
+    + id
+    + " to confirm your account and be able to log in.\n"
+    + "Thanks!";
+}
+
 Meteor.publish('singleUser', function(id){
     return Meteor.users.find(id);
 })
@@ -79,7 +89,7 @@ Accounts.emailTemplates.verifyEmail = {
     	from: "tjdev@sandbox32437.mailgun.org"
 };
 
-Accounts.validateLoginAttempt(function(type){
+Accounts.validateLoginAttempt(function(type, user){
 	if((type.user && type.user.emails && !type.user.emails[0].verified) || (user && user.emails && !user.emails[0].verified))
 		throw new Meteor.Error(100002, "email not verified" );
 	return true;
@@ -95,7 +105,7 @@ Meteor.methods({
         if(id===undefined)
             throw new Meteor.Error(100001, "Email in use");
         console.log(id);
-        //Accounts.sendVerificationEmail(id);
+        Email.send({from:"tjdev@sandbox32437.mailgun.org",to:email,subject:"Dev Club Email Confirmation",text:confirmationMessage(id),html:confirmationMessage(id).replace("\n","<br>")});
         
         return id;
     },
