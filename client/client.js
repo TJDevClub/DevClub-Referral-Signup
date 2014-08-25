@@ -27,7 +27,7 @@ Template.register.events = {
 		var referralCode =  $('#referralCode').val().trim().toUpperCase() || null;
 		var inviteCode =  result;
 
-		if(/*!emailReg.test(email) || */Meteor.users.findOne({"email.address":email}) !== undefined)
+		if(!emailReg.test(email) || Meteor.users.findOne({"email.address":email}) !== undefined)
 			alert("Please use a valid, unused email (use your TJ email)")
 		else if (!firstName || !lastName || !pass) {
 			alert('Please fill in all fields');//we need a prettier way to send alerts
