@@ -116,9 +116,13 @@ Meteor.methods({
     },
     update: function(uid){
         if(Meteor.users.findOne({_id:uid}).emails[0].verified === true)
-            return
+            return false;
         Meteor.users.update({_id:uid}, {$set:{"emails.0.verified":true}});
-        var referral = Meteor.users.findOne({_id:uid}).referralCode;
-        Meteor.users.update({referralCode: referral}, {$inc:{score:1}});
+        var referral = Meteor.users.findOne({_id:uid}).profile.referralCode;
+        Meteor.users.update({"profile.inviteCode": referral}, {$inc:{"profile.score":1}});
+        return true;
+    },
+    getCode: function(){
+        return Meteor.users.findOne(this.userId).profile.inviteCode;
     }
 });

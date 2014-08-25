@@ -5,9 +5,18 @@ Alerts = new Meteor.Collection(null);
 // studentsSub = Meteor.subscribe('students');
 // confirmationSub = Meteor.subscribe('confirmation');
 Meteor.subscribe('userData');
-if(Meteor.user())
-    return Meteor.subscribe('singleUser', Meteor.user()._id)
+// if(Meteor.user())
+//     return Meteor.subscribe('singleUser', Meteor.user()._id)
 var emailReg = /.*\@tjhsst\.edu$/i;
+Session.set('code', "Loading...");
+
+Deps.autorun(function(){
+	if(Meteor.user())
+        Meteor.call('getCode', function(e,r){
+            Session.set('code', r);
+        });//have to keep stuff like this secret so people without ref codes can't steal ref codes by db.finding    
+});
+
 
 Template.register.events = {
 	'click input[type=submit]': function(event) {
@@ -83,14 +92,12 @@ Template.header.email = function(){
 }
 
 Template.header.code = function(){
-    return Meteor.user().profile.inviteCode;
+    return Session.get('code') || "Loading...";
 }
 
-// Template.header.events = {
-//     'dblclick #code': function(event){
-//         event.target
-//     }
-// }
+Template.header.score = function(){
+    return Meteor.user().profile.score;
+}
 
 Template.login.events = {
 	'click input[type=submit]': function(event) {
@@ -122,7 +129,6 @@ Template.header.helpers({
 	isLoggedIn: function() {
 		return !!Meteor.user();
 	}
-
 });
 
 UI.registerHelper('users', function(){
