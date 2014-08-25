@@ -46,12 +46,12 @@
                     <p class="navbar-text">Logged in as {{email}}</p>
                 </li> -->
                 <li>
-                    <p class="navbar-text">Your code: <b id="code">{{code}}</b>
-                    </p>
+                    <!--We should have a shar page-->
+                    <a href="#share">Your code: <b id="code">{{code}}</b></a>
                 </li>
                 <li>
-                    <p class="navbar-text">Your score: <b id="score">{{score}}</b>
-                    </p>
+                    <a href="{{pathFor 'standings'}}">Your score: <b id="score">{{score}}</b>
+                    </a>
                 </li>
                 <li><a href="/" class="log-out">Log Out</a>
                 </li>

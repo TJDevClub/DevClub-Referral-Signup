@@ -131,10 +131,10 @@ Template.login.events = {
         var password = $('#password').val();
         Meteor.loginWithPassword(email, password, function(error) {
             if (error) {
-                alert(error.reason + ' error');
+                addAlert(error.reason + ' error');
             } else {
                 Router.go('/');
-                alert('You are now logged in.');
+                addAlert('You are now logged in.');
             }
         });
     }
