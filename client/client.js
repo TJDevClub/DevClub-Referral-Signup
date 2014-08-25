@@ -65,8 +65,8 @@ Template.register.events = {
             //				 console.log('done');
             //				 Router.go('home');
             //			 });
-            if (referralCode !== null) //we've checked
-                score = 2;
+            if (referralCode !== null) //we've checked if it's a real code already
+                score = 1;
 
             Meteor.call('register', email, pass, {
                     created_at: new Date(),
