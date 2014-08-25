@@ -71,6 +71,16 @@ Template.header.email = function(){
     return Meteor.user().emails[0].address;
 }
 
+Template.header.code = function(){
+    return Meteor.user().profile.inviteCode;
+}
+
+// Template.header.events = {
+//     'dblclick #code': function(event){
+//         event.target
+//     }
+// }
+
 Template.login.events = {
 	'click input[type=submit]': function(event) {
 		event.preventDefault();
