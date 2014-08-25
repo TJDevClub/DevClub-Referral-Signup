@@ -59,9 +59,9 @@ Accounts.onCreateUser(function(options, user) {
     return user;
 });
 
-Accounts.config({
-    sendVerificationEmail: true
-})
+// Accounts.config({
+//     sendVerificationEmail: true
+// })
 
 Accounts.emailTemplates.siteName = "Dev Club";
 
@@ -80,10 +80,10 @@ Meteor.methods({
             profile: options
         });
 
-        console.log(options);
+
         if (id === undefined)
             throw new Meteor.Error(100001, "Email in use");
-        console.log(id);
+
         Email.send({
             from: "tjdev@sandbox32437.mailgun.org",
             to: email,
