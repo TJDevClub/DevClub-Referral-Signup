@@ -15,20 +15,21 @@ Template.register.events = {
 
 		var result = '';
 		
-		while(result === '' || Students.findOne({inviteCode:result}) !== undefined){
+		while(result === '' || Meteor.users.findOne({inviteCode:result}) !== undefined){
 			result = Math.random().toString(36).substring(2,2+length).toUpperCase();
 		}
 		
 		
-		var firstName =  $('#first_name').val();
-		var lastName =  $('#last_name').val();
+		var firstName =  $('#first_name').val().trim();
+		var lastName =  $('#last_name').val().trim();
 		var email =  $('#email').val().trim();
-		var referralCode =  $('#referralCode').val() || null;
+        var pass = $('#password').val();
+		var referralCode =  $('#referralCode').val().trim().toUpperCase() || null;
 		var inviteCode =  result;
 
-		if(!emailReg.test(email) || Students.findOne({email:email}) !== undefined || Confirmation.findOne({email:email}) !== undefined/*So someone being confirmed doesn't get more emails*/)
+		if(/*!emailReg.test(email) || */Meteor.users.findOne({"email.address":email}) !== undefined)
 			alert("Please use a valid, unused email (use your TJ email)")
-		else if (!firstName || !lastName) {
+		else if (!firstName || !lastName || !pass) {
 			alert('Please fill in all fields');//we need a prettier way to send alerts
 		} else {
 			alert('Your invite code is ' + inviteCode);
@@ -44,18 +45,26 @@ Template.register.events = {
 //				 Router.go('home');
 //			 });
 
-			Accounts.createUser({
-				username: template.find("#signup-username").value,
-				password: template.find("#signup-password").value,
+            
+            
+			Meteor.call('register',{
+                email: email,
+				password: pass,
 				profile: {
-					name: template.find("#signup-name").value
-					// Other required field values can go here
+                    created_at: new Date(),
+                    firstName: firstName,
+                    lastName: lastName,
+                    referralCode: referralCode,
+                    inviteCode: inviteCode
 				}
-			}, function(error) {
-				if (error) {
-					// Display the user creation error to the user however you want
-				}
-			});
+			}, function(err, data){
+                if(err){
+                    alert(err)
+                }
+                
+                console.log(data);
+                
+            });
 
 		}
 	}
