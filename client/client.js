@@ -53,7 +53,7 @@ Template.register.events = {
         }))
             alert("Invalid referral!");
         else {
-            alert('Your invite code is ' + inviteCode + "\nGo to your email to verify your account!");
+            alert("You've successfully registered. Go to your email to verify your account to start getting points!");
             //			 Confirmation.insert({
             //				 created_at: new Date,
             //				 firstName: firstName,
