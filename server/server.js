@@ -23,11 +23,11 @@ Meteor.startup(function() {
 //     });
 // });
 
-function confirmationMessage(id, code) {
+function confirmationMessage(id) {
     var url = process.env.ROOT_URL;
     if(url.substring(url.length - 1) != "/")
         url+="/";
-    return "Hello!<br>" + "Please visit <a href='" + url + "verify/" + id + "'>here</a> to confirm your account and be able to log in. If you can't see the link, go to " + url + "verify/" + id + "<br>" + "Also, your referral code, which you can only use once your account has been confirmed, is " + code + "<br>Thanks!";
+    return "Hello!<br>" + "Please visit <a href='" + url + "verify/" + id + "'>here</a> to confirm your account and be able to log in. If you can't see the link, go to " + url + "verify/" + id + "<br>Also, you can see your referral code once you've logged in.<br>Thanks!";
 }
 
 Meteor.publish('singleUser', function(id) {
@@ -87,8 +87,8 @@ Meteor.methods({
             from: "tjdev@sandbox32437.mailgun.org",
             to: email,
             subject: "Dev Club Email Confirmation",
-            text: confirmationMessage(id, options.referralCode).replace("<br>","\n").replace("<a href='","").replace(">","").replace("</a>",""),
-            html: confirmationMessage(id, options.referralCode)
+            text: confirmationMessage(id).replace("<br>","\n").replace("<a href='","").replace(">","").replace("</a>",""),
+            html: confirmationMessage(id)
         });
 
         return id;
