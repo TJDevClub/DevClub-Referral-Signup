@@ -70,7 +70,7 @@
 <template name="home">
    {{#if isMobile}}
 <!--Redirect to the mobile template here if possible-->
-        {{>mobile}}
+        {{>mobileHome}}
     {{else}}
      <div id="intro">
       
@@ -100,7 +100,7 @@
 
 </template>
 
-<template name = "mobile">
+<template name = "mobileHome">
     <!--<p>You're on mobile right now</p>-->
     <div style = "margin:0 auto; text-align: center">
         <a href="{{pathFor 'login'}}" class="btn btn-success mb">Login</a>
@@ -110,31 +110,56 @@
 </template>
 
 <template name="standings">
-    <div class="row centered-form" style = "text-align : center">
-
-        <h1>Dev Club Registration!</h1>
-
-        <table class="table table-striped table-hover ">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each usersWithIndexAndEmail}}
-                <tr>
-                    <td>{{index}}</td>
-                    <td>{{profile.firstName}} {{profile.lastName}}</td>
-                    <td>{{email}}</td>
-                    <td>{{profile.score}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
+    
+    {{#if isMobile}}
+        <div class="row centered-form" style = "text-align : center; width:75%; margin: 0 auto">
+            <h1>Dev Club Leaderboards!</h1>
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each usersWithIndexAndEmail}}
+                    <tr>
+                        <td>{{index}}</td>
+                        <td>{{profile.firstName}} {{profile.lastName}}</td>
+                        <td>{{email}}</td>
+                        <td>{{profile.score}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <div class="row centered-form" style = "text-align : center">
+            <h1>Dev Club Leaderboards!</h1>
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each usersWithIndexAndEmail}}
+                    <tr>
+                        <td>{{index}}</td>
+                        <td>{{profile.firstName}} {{profile.lastName}}</td>
+                        <td>{{email}}</td>
+                        <td>{{profile.score}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
     <!-- Top register people -->
 </template>
 

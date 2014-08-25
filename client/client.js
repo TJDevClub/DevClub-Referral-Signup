@@ -32,7 +32,12 @@ function addAlert(message, time){
 Template.home.isMobile = function(){
     var index = navigator.appVersion.indexOf("Mobile");
   	return (index > -1);
-}
+};
+
+Template.standings.isMobile = function(){
+    var index = navigator.appVersion.indexOf("Mobile");
+    return (index>-1);
+};
 
 Template.register.events = {
     'click input[type=submit]': function(event) {
@@ -95,11 +100,11 @@ Template.register.events = {
                 },
                 function(err, data) {
                     if (err) {
-                        addAlert(err, 2000)
+                        addAlert(err, 2000);
                     }
 
 
-                });
+            });
 
             Router.go('home');
 
