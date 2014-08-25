@@ -62,6 +62,8 @@ Template.register.events = {
                 
                 
             });
+            
+            Router.go('home');
 
 		}
 	}
@@ -113,5 +115,17 @@ Template.header.helpers({
 	}
 
 });
+
+UI.registerHelper('score', function(uid){
+	var user = Meteor.users.findOne(uid);
+	var code = user.profile.inviteCode;
+	var score = 0;
+	if(user.profile.referralCode !== null)
+		score+=2;
+	
+	score+=Meteor.users.find({"profile.referralCode":code}).count();
+	
+	return score;
+})
 
 
