@@ -49,12 +49,9 @@ Router.map(function() {
         },
         action: function() {
             var router = this;
-            if(Meteor.users.findOne() === undefined){
-                return router.redirect('/notFound');
-            }
             Meteor.call('update', this.params.verif, function(e, r) {
                 if (r === false)
-                    router.redirect('/');
+                    router.redirect('/notFound');
                 else
                     router.redirect('/complete')
 

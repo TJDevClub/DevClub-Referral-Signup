@@ -43,8 +43,8 @@ Meteor.publish('userData', function() {
             "profile.lastName": true,
             "profile.firstName": true,
             "profile.score": true,
-            "emails": true,
-            "profile.inviteCode":true//if someone does find this and exploit it, they deserve the 5 ref points
+            "emails": true/*,
+            "profile.inviteCode":true//if someone does find this and exploit it, they deserve the 5 ref points*/
         }
     });
 })
@@ -104,7 +104,7 @@ Meteor.methods({
         return "Winner";
     },
     update: function(uid) {
-        if (Meteor.users.findOne({
+        if (Meteor.users.findOne({_id:uid}) === undefined || Meteor.users.findOne({
             _id: uid
         }).emails[0].verified === true)
             return false;

@@ -38,7 +38,7 @@ Template.register.events = {
         var result = '';
 
         while (result === '' || Meteor.users.findOne({
-            inviteCode: result
+            hashedInvite: SHA1(result)
         }) !== undefined) {
             result = Math.random().toString(36).substring(2, 2 + length).toUpperCase();
         }
