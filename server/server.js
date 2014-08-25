@@ -121,7 +121,7 @@ Meteor.methods({
             "profile.inviteCode": referral
         }, {
             $inc: {
-                "profile.score": 1
+                "profile.score": 2
             }
         });
         return true;
