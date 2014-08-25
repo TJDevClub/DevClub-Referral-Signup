@@ -10,136 +10,148 @@ Meteor.subscribe('userData');
 var emailReg = /.*\@tjhsst\.edu$/i;
 Session.set('code', "Loading...");
 
-Deps.autorun(function(){
-	if(Meteor.user())
-        Meteor.call('getCode', function(e,r){
+Deps.autorun(function() {
+    if (Meteor.user())
+        Meteor.call('getCode', function(e, r) {
             Session.set('code', r);
-        });//have to keep stuff like this secret so people without ref codes can't steal ref codes by db.finding    
+        }); //have to keep stuff like this secret so people without ref codes can't steal ref codes by db.finding    
 });
 
 
 Template.register.events = {
-	'click input[type=submit]': function(event) {
-		event.preventDefault();
+    'click input[type=submit]': function(event) {
+        event.preventDefault();
 
-		var length = 6;
+        var length = 6;
 
-		var result = '';
-		
-		while(result === '' || Meteor.users.findOne({inviteCode:result}) !== undefined){
-			result = Math.random().toString(36).substring(2,2+length).toUpperCase();
-		}
-		
-		var score = 0;
+        var result = '';
 
-		var firstName =  $('#first_name').val().trim();
-		var lastName =  $('#last_name').val().trim();
-		var email =  $('#email').val().trim();
+        while (result === '' || Meteor.users.findOne({
+            inviteCode: result
+        }) !== undefined) {
+            result = Math.random().toString(36).substring(2, 2 + length).toUpperCase();
+        }
+
+        var score = 0;
+
+        var firstName = $('#first_name').val().trim();
+        var lastName = $('#last_name').val().trim();
+        var email = $('#email').val().trim();
         var pass = $('#password').val();
-		var referralCode =  $('#referralCode').val().trim().toUpperCase() || null;
-		var inviteCode =  result;
-        console.log(inviteCode);
+        var referralCode = $('#referralCode').val().trim().toUpperCase() || null;
+        var inviteCode = result;
         var hashedInvite = SHA1(inviteCode);
 
-		if(!emailReg.test(email) || Meteor.users.findOne({"email.address":email}) !== undefined)
-			alert("Please use a valid, unused email (use your TJ email)")
-		else if (!firstName || !lastName || !pass)
-			alert('Please fill in all fields');//we need a prettier way to send alerts
-        else if(referralCode !== null && !Meteor.users.findOne({"profile.hashedInvite":SHA1(referralCode)}))
+        if (!emailReg.test(email) || Meteor.users.findOne({
+            "email.address": email
+        }) !== undefined)
+            alert("Please use a valid, unused email (use your TJ email)")
+        else if (!firstName || !lastName || !pass)
+            alert('Please fill in all fields'); //we need a prettier way to send alerts
+        else if (referralCode !== null && !Meteor.users.findOne({
+            "profile.hashedInvite": SHA1(referralCode)
+        }))
             alert("Invalid referral!");
         else {
-			alert('Your invite code is ' + inviteCode + "\nGo to your email to verify your account!");
-//			 Confirmation.insert({
-//				 created_at: new Date,
-//				 firstName: firstName,
-//				 lastName: lastName,
-//				 email: email,
-//				 referralCode: referralCode,
-//				 inviteCode: inviteCode
-//			 }, function(){
-//				 console.log('done');
-//				 Router.go('home');
-//			 });
-			if(referralCode !== null)//we've checked
-				score=2;
-            
-			Meteor.call('register', email, pass,
-				{
+            alert('Your invite code is ' + inviteCode + "\nGo to your email to verify your account!");
+            //			 Confirmation.insert({
+            //				 created_at: new Date,
+            //				 firstName: firstName,
+            //				 lastName: lastName,
+            //				 email: email,
+            //				 referralCode: referralCode,
+            //				 inviteCode: inviteCode
+            //			 }, function(){
+            //				 console.log('done');
+            //				 Router.go('home');
+            //			 });
+            if (referralCode !== null) //we've checked
+                score = 2;
+
+            Meteor.call('register', email, pass, {
                     created_at: new Date(),
                     firstName: firstName,
                     lastName: lastName,
                     referralCode: referralCode,
                     inviteCode: inviteCode,
-                	hashedInvite: hashedInvite,
-					score:score
-				},
-                function(err, data){
-                if(err){
-                    alert(err)
-                }
-                
-                
-            });
-            
+                    hashedInvite: hashedInvite,
+                    score: score
+                },
+                function(err, data) {
+                    if (err) {
+                        alert(err)
+                    }
+
+
+                });
+
             Router.go('home');
 
-		}
-	}
+        }
+    }
 };
 
-Template.header.email = function(){
+Template.header.email = function() {
     return Meteor.user().emails[0].address;
 }
 
-Template.header.code = function(){
+Template.header.code = function() {
     return Session.get('code') || "Loading...";
 }
 
-Template.header.score = function(){
+Template.header.score = function() {
     return Meteor.user().profile.score;
 }
 
 Template.login.events = {
-	'click input[type=submit]': function(event) {
-		event.preventDefault();
-		var email = $('#email').val();
-		var password = $('#password').val();
-		Meteor.loginWithPassword(email, password, function(error) {
-			if (error) {
-				alert(error.reason + ' error');
-			} else {
-				Router.go('/');
-				alert('You are now logged in.');
-			}
-		});
-	}
+    'click input[type=submit]': function(event) {
+        event.preventDefault();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        Meteor.loginWithPassword(email, password, function(error) {
+            if (error) {
+                alert(error.reason + ' error');
+            } else {
+                Router.go('/');
+                alert('You are now logged in.');
+            }
+        });
+    }
 };
 
 Template.header.user = function() {
-	return Meteor.user();
+    return Meteor.user();
 }
 
 Template.header.events({
-	'click .log-out': function() {
-		Meteor.logout();
-	}
+    'click .log-out': function() {
+        Meteor.logout();
+    }
 });
 
 Template.header.helpers({
-	isLoggedIn: function() {
-		return !!Meteor.user();
-	}
+    isLoggedIn: function() {
+        return !!Meteor.user();
+    }
 });
 
-UI.registerHelper('users', function(){
-    return Meteor.users.find({},{sort:{"profile.score":-1}});
+UI.registerHelper('users', function() {
+    return Meteor.users.find({}, {
+        sort: {
+            "profile.score": -1
+        }
+    });
 });
 
-UI.registerHelper('usersWithIndexAndEmail',function() {
-    var users = Meteor.users.find({},{sort:{"profile.score":-1}}).fetch();
+UI.registerHelper('usersWithIndexAndEmail', function() {
+    var users = Meteor.users.find({}, {
+        sort: {
+            "profile.score": -1
+        }
+    }).fetch();
 
-    for(var i = 0; i<users.length; i++) {
-        users[i].index = (i+1);
+    for (var i = 0; i < users.length; i++) {
+        users[i].index = (i + 1);
         users[i].email = users[i].emails[0].address;
     }
 
