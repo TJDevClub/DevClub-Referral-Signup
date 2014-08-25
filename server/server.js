@@ -25,14 +25,16 @@ Meteor.startup(function() {
 //     });
 // });
 
-function confirmationMessage(id){
+function confirmationMessage(id, code){
     return "Hello!\n"
     + "Please visit "
     + process.env.ROOT_URL
     + "verify/"
     + id
     + " to confirm your account and be able to log in.\n"
-    + "Thanks!";
+    + "Also, your referral code, which you can only use once your account has been confirmed, is "
+    + code
+    + "\nThanks!";
 }
 
 Meteor.publish('singleUser', function(id){
@@ -40,7 +42,7 @@ Meteor.publish('singleUser', function(id){
 })
 
 Meteor.publish('userData', function(){
-    return Meteor.users.find({});
+    return Meteor.users.find({"emails.verified":true/*so people can't fake verify*/},{fields:{"profile.hashedInvite":true,"profile.lastName":true,"profile.firstName":true,"profile.score":true,"emails":true}});
 })
 
 
@@ -98,14 +100,13 @@ Accounts.validateLoginAttempt(function(type, user){
 Meteor.methods({
     register: function(email, pass, options) {
         
-
         var id = Accounts.createUser({email:email, password:pass, profile:options});
         
         console.log(options);
         if(id===undefined)
             throw new Meteor.Error(100001, "Email in use");
         console.log(id);
-        Email.send({from:"tjdev@sandbox32437.mailgun.org",to:email,subject:"Dev Club Email Confirmation",text:confirmationMessage(id),html:confirmationMessage(id).replace("\n","<br>")});
+        Email.send({from:"tjdev@sandbox32437.mailgun.org",to:email,subject:"Dev Club Email Confirmation",text:confirmationMessage(id, options.referralCode),html:confirmationMessage(id, options.referralCode).replace("\n","<br>")});
         
         return id;
     },
