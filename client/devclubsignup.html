@@ -27,7 +27,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{pathFor 'home'}}">Home</a></li>
                 {{#if isLoggedIn}}
-                    <p class="navbar-text">Authorized as {{currentUser.username}}</p>
+                    <p class="navbar-text">Logged in as {{email}}</p>
                     <li><a href="/" class="log-out">Log Out</a></li>
                 {{else}}
                     <li><a href="{{pathFor 'login'}}">Log In</a></li>

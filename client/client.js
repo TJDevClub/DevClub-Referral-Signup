@@ -67,7 +67,9 @@ Template.register.events = {
 	}
 };
 
-
+Template.header.email = function(){
+    return Meteor.user().emails[0].address;
+}
 
 Template.login.events = {
 	'click input[type=submit]': function(event) {
