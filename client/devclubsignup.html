@@ -43,7 +43,31 @@
 
 
 <template name="home">
-	<p>Dev Club Registration!</p>
+    <div class="row centered-form">
+
+        <h1>Dev Club Registration!</h1>
+        
+        <table class="table table-striped table-hover ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each usersWithIndexAndEmail}}
+                <tr>
+                    <td>{{index}}</td>
+                    <td>{{profile.firstName}} {{profile.lastName}}</td>
+                    <td>{{email}}</td>
+                    <td>{{profile.score}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
     <!-- Top register people -->
 </template>
 
