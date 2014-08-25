@@ -2,8 +2,6 @@
     <title>devclubsignup</title>
 </head>
 
-
-
 <template name="layout">
     <div class="container">
         {{> header}}
@@ -25,8 +23,8 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{pathFor 'home'}}">Home</a>
-                </li>
+                <li><a href="{{pathFor 'home'}}">Home</a></li>
+                <li><a href="{{pathFor 'standings'}}">Standings</a></li>
                 {{#if isLoggedIn}}
                 <li>
                     <p class="navbar-text">Logged in as {{email}}</p>
@@ -53,8 +51,12 @@
     </div>
 </template>
 
-
 <template name="home">
+    <h1>Dev Club Registration!</h1>
+
+</template>
+
+<template name="standings">
     <div class="row centered-form">
 
         <h1>Dev Club Registration!</h1>

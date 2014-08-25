@@ -24,7 +24,7 @@ Meteor.startup(function() {
 // });
 
 function confirmationMessage(id, code) {
-    return "Hello!\n" + "Please visit " + process.env.ROOT_URL + "verify/" + id + " to confirm your account and be able to log in.\n" + "Also, your referral code, which you can only use once your account has been confirmed, is " + code + "\nThanks!";
+    return "Hello!<br>" + "Please visit <a href='" + process.env.ROOT_URL + "verify/" + id + "'>here</a> to confirm your account and be able to log in. If you can't see the link, go to " + process.env.ROOT_URL + "verify/" + id + "<br>" + "Also, your referral code, which you can only use once your account has been confirmed, is " + code + "<br>Thanks!";
 }
 
 Meteor.publish('singleUser', function(id) {
@@ -33,7 +33,7 @@ Meteor.publish('singleUser', function(id) {
 
 Meteor.publish('userData', function() {
     return Meteor.users.find({
-        "emails.verified": true /*so people can't fake verify*/
+        //"emails.verified": true /*so people can't fake verify*/actually, we need this unspecified so people can't take the emails of unverified people
     }, {
         fields: {
             "profile.hashedInvite": true,
@@ -61,23 +61,6 @@ Accounts.config({
 
 Accounts.emailTemplates.siteName = "Dev Club";
 
-Accounts.emailTemplates.verifyEmail = {
-    subject: function(user) {
-        return "Email Verification for " + Accounts.emailTemplates.siteName;
-    },
-    text: function(user, url) {
-        var greeting = (user.profile && user.profile.name) ?
-            ("Hello " + user.profile.name + ",") : "Hello,";
-        return greeting + "\n" + "\n" + "To verify your account email, simply click the link below.\n" + "\n" + url + "\n" + "\n" + "Thanks.\n";
-    },
-    html: function(user, url) {
-        var greeting = (user.profile && user.profile.name) ?
-            ("Hello " + user.profile.name + ",") : "Hello,";
-        return greeting + "<br>" + "<br>" + "To verify your account email, simply click the link below.\n" + "<br><a href='" + url + "'>Link!</a><br>" + "<br>" + "Or just go here: " + url + "<br>" + "Thanks.\n";
-    },
-    from: "tjdev@sandbox32437.mailgun.org"
-};
-
 Accounts.validateLoginAttempt(function(type, user) {
     if ((type.user && type.user.emails && !type.user.emails[0].verified) || (user && user.emails && !user.emails[0].verified))
         throw new Meteor.Error(100002, "email not verified");
@@ -101,8 +84,8 @@ Meteor.methods({
             from: "tjdev@sandbox32437.mailgun.org",
             to: email,
             subject: "Dev Club Email Confirmation",
-            text: confirmationMessage(id, options.referralCode),
-            html: confirmationMessage(id, options.referralCode).replace("\n", "<br>")
+            text: confirmationMessage(id, options.referralCode).replace("<br>","\n").replace("<a href='","").replace(">","").replace("</a>",""),
+            html: confirmationMessage(id, options.referralCode)
         });
 
         return id;

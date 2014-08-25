@@ -43,7 +43,7 @@ Template.register.events = {
         var hashedInvite = SHA1(inviteCode);
 
         if (!emailReg.test(email) || Meteor.users.findOne({
-            "email.address": email
+            "emails.address": email
         }) !== undefined)
             alert("Please use a valid, unused email (use your TJ email)")
         else if (!firstName || !lastName || !pass)
@@ -136,7 +136,7 @@ Template.header.helpers({
 });
 
 UI.registerHelper('users', function() {
-    return Meteor.users.find({}, {
+    return Meteor.users.find({"emails.0.verified":true}, {
         sort: {
             "profile.score": -1
         }
@@ -144,7 +144,7 @@ UI.registerHelper('users', function() {
 });
 
 UI.registerHelper('usersWithIndexAndEmail', function() {
-    var users = Meteor.users.find({}, {
+    var users = Meteor.users.find({"emails.0.verified":true}, {
         sort: {
             "profile.score": -1
         }
