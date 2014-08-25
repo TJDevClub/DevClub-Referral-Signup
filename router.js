@@ -8,6 +8,7 @@ Client-side Router.
 // Config
 Router.configure({
     layoutTemplate: 'layout',
+    notFoundTemplate: 'notFound'
 });
 
 // Filters
@@ -48,14 +49,18 @@ Router.map(function() {
         },
         action: function() {
             var router = this;
+            if(Meteor.users.findOne() === undefined){
+                return router.redirect('/notFound');
+            }
             Meteor.call('update', this.params.verif, function(e, r) {
                 if (r === false)
                     router.redirect('/');
                 else
                     router.redirect('/complete')
 
-            });
-            this.render('loading');
+                    });
+            this.render('loading');  
+
 
 
         }

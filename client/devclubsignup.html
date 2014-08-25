@@ -2,6 +2,10 @@
     <title>DevClub Signup</title>
 </head>
 
+<template name="notFound">
+    <p>Something went wrong.</p>
+</template>
+
 <template name="alerts">
     <div id="alerts" style="position:absolute;left:50%;z-index:100;margin-top:2em;">
         {{#each alerts}}
@@ -78,7 +82,7 @@
                             <div class="line-spacer"></div>
                             <p><span>Interest Form</span></p>
                             <br>
-                            <a href="#" class="btn btn-success">Login.</a>
+                            <a href="{{pathFor 'login'}}" class="btn btn-success">Login.</a>
                             <a href="{{pathFor 'register'}}" class="btn btn-danger">Sign Up.</a>
                         </div>
                     </div>
