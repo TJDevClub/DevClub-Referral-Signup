@@ -43,7 +43,8 @@ Meteor.publish('userData', function() {
             "profile.lastName": true,
             "profile.firstName": true,
             "profile.score": true,
-            "emails": true
+            "emails": true,
+            "profile.inviteCode":true//if someone does find this and exploit it, they deserve the 5 ref points
         }
     });
 })
