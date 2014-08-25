@@ -17,7 +17,9 @@ Deps.autorun(function() {
         }); //have to keep stuff like this secret so people without ref codes can't steal ref codes by db.finding    
 });
 
-
+Template.alerts.alerts = function(){
+    return Alerts.find();
+}
 
 function addAlert(message, time){
     time = time || 2000;
