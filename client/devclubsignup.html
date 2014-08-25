@@ -3,9 +3,9 @@
 </head>
 
 <template name="alerts">
-    <div id="alerts" style="position:absolute;">
+    <div id="alerts" style="position:absolute;left:50%;z-index:100;margin-top:2em;">
         {{#each alerts}}
-            <div {{attributes}}>
+            <div class="alert alert-info" style="position:relative;left:-50%;min-width:20em;text-align:center;">
                 {{message}}
             </div>
         {{/each}}
@@ -14,6 +14,7 @@
 
 <template name="layout">
     <div class="container">
+        {{> alerts}}
         {{> header}}
         {{> yield}}
     </div>
@@ -62,8 +63,11 @@
 </template>
 
 <template name="home">
-    <h1>Dev Club Registration!</h1>
-
+   <div class="jumbotron">
+      <h1>TJ DEV CLUB</h1>
+      <p>Interest Form.</p>
+      <p><a class="btn btn-primary btn-lg">Sign Up</a></p>
+    </div>
 </template>
 
 <template name="standings">
