@@ -1,5 +1,6 @@
 <head>
     <title>DevClub Signup</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
 <template name="notFound">
@@ -67,7 +68,10 @@
 </template>
 
 <template name="home">
-   
+   {{#if isMobile}}
+<!--Redirect to the mobile template here if possible-->
+        {{>mobile}}
+    {{else}}
      <div id="intro">
       
             <div class="intro-text">
@@ -92,7 +96,17 @@
             </div>
             
      </div>
+     {{/if}}
 
+</template>
+
+<template name = "mobile">
+    <!--<p>You're on mobile right now</p>-->
+    <div style = "margin:0 auto">
+        <a href="{{pathFor 'login'}}" class="btn btn-success mb">Login</a>
+        <a href="{{pathFor 'register'}}" class="btn btn-danger mb">Sign Up</a>
+        <a href = "{{pathFor 'standings'}}" class = "btn btn-info mb" style = "margin-top:10px">Standings</a>
+    </div>
 </template>
 
 <template name="standings">
@@ -173,39 +187,6 @@
 </template>
 
 <template name="login">
-<!--     <div id="intro">
-      
-            <div class="intro-text">
-                <div class="container">
-                    <div class="row">
-                    
-                        
-                        <div class="col-md-12">
-
-                            <div class="brand">
-                                <h1><a>TJ DEV CLUB</a></h1>
-                                <div class="line-spacer"></div>
-                                <p><span>Interest Form</span></p>
-                                <br>
-                                <form accept-charset="UTF-8" role="form">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="TJ Email" name="email" id="email" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="Password" name="password" type="password" id="password" value="">
-                                        </div>
-                                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Log In">
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-     </div> -->
-    
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
             <div class="panel panel-default">

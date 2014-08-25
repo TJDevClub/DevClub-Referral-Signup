@@ -1,0 +1,5 @@
+echo "To run stuff, you need to do 'meteor -p $PORT'."
+echo "Alternately, you can use the script I made with 'bash start.sh'"
+echo "You can only have one instance of meteor at a time, remember, so if there's an error, it probably means it's deployed already"
+echo "Everything will be available at https://devclub-referral-signup-c9-mjkaufer.c9.io, hopefully"
+echo "Remember to save for changes to update."

@@ -29,6 +29,11 @@ function addAlert(message, time){
     }, time)
 }
 
+Template.home.isMobile = function(){
+    var index = navigator.appVersion.indexOf("Mobile");
+  	return (index > -1);
+}
+
 Template.register.events = {
     'click input[type=submit]': function(event) {
         event.preventDefault();
