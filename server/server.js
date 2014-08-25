@@ -24,7 +24,10 @@ Meteor.startup(function() {
 // });
 
 function confirmationMessage(id, code) {
-    return "Hello!<br>" + "Please visit <a href='" + process.env.ROOT_URL + "verify/" + id + "'>here</a> to confirm your account and be able to log in. If you can't see the link, go to " + process.env.ROOT_URL + "verify/" + id + "<br>" + "Also, your referral code, which you can only use once your account has been confirmed, is " + code + "<br>Thanks!";
+    var url = process.env.ROOT_URL;
+    if(url.substring(url.length - 1) != "/")
+        url+="/";
+    return "Hello!<br>" + "Please visit <a href='" + url + "verify/" + id + "'>here</a> to confirm your account and be able to log in. If you can't see the link, go to " + url + "verify/" + id + "<br>" + "Also, your referral code, which you can only use once your account has been confirmed, is " + code + "<br>Thanks!";
 }
 
 Meteor.publish('singleUser', function(id) {
