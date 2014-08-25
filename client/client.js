@@ -1,4 +1,4 @@
-// Students = new Meteor.Collection('students');
+s// Students = new Meteor.Collection('students');
 Alerts = new Meteor.Collection(null);
 // Confirmation = new Meteor.Collection('confirmation');
 
@@ -17,6 +17,14 @@ Deps.autorun(function() {
         }); //have to keep stuff like this secret so people without ref codes can't steal ref codes by db.finding    
 });
 
+
+Template.alerts.helpers({
+  attributes: function () {
+    return {
+      class: "alert alert-info"
+    }
+  }
+});
 
 Template.register.events = {
     'click input[type=submit]': function(event) {
@@ -45,15 +53,15 @@ Template.register.events = {
         if (!emailReg.test(email) || Meteor.users.findOne({
             "emails.address": email
         }) !== undefined)
-            alert("Please use a valid, unused email (use your TJ email)")
+            addAlert("Please use a valid, unused email (use your TJ email)", 2000)
         else if (!firstName || !lastName || !pass)
-            alert('Please fill in all fields'); //we need a prettier way to send alerts
+            addAlert('Please fill in all fields', 2000); //we need a prettier way to send alerts
         else if (referralCode !== null && !Meteor.users.findOne({
             "profile.hashedInvite": SHA1(referralCode)
         }))
-            alert("Invalid referral!");
+            addAlert("Invalid referral!", 2000);
         else {
-            alert("You've successfully registered. Go to your email to verify your account to start getting points!");
+            addAlert("You've successfully registered. Go to your email to verify your account to start getting points!", 2500);
             //			 Confirmation.insert({
             //				 created_at: new Date,
             //				 firstName: firstName,
@@ -158,4 +166,11 @@ UI.registerHelper('usersWithIndexAndEmail', function() {
     return users;
 });
 
-function SHA1(a){function b(a,b){var c=a<<b|a>>>32-b;return c}function d(a){var c,d,b="";for(c=7;c>=0;c--)d=15&a>>>4*c,b+=d.toString(16);return b}function e(a){a=a.replace(/\r\n/g,"\n");for(var b="",c=0;c<a.length;c++){var d=a.charCodeAt(c);128>d?b+=String.fromCharCode(d):d>127&&2048>d?(b+=String.fromCharCode(192|d>>6),b+=String.fromCharCode(128|63&d)):(b+=String.fromCharCode(224|d>>12),b+=String.fromCharCode(128|63&d>>6),b+=String.fromCharCode(128|63&d))}return b}var f,g,h,o,p,q,r,s,t,i=new Array(80),j=1732584193,k=4023233417,l=2562383102,m=271733878,n=3285377520;a=e(a);var u=a.length,v=new Array;for(g=0;u-3>g;g+=4)h=a.charCodeAt(g)<<24|a.charCodeAt(g+1)<<16|a.charCodeAt(g+2)<<8|a.charCodeAt(g+3),v.push(h);switch(u%4){case 0:g=2147483648;break;case 1:g=8388608|a.charCodeAt(u-1)<<24;break;case 2:g=32768|(a.charCodeAt(u-2)<<24|a.charCodeAt(u-1)<<16);break;case 3:g=128|(a.charCodeAt(u-3)<<24|a.charCodeAt(u-2)<<16|a.charCodeAt(u-1)<<8)}for(v.push(g);14!=v.length%16;)v.push(0);for(v.push(u>>>29),v.push(4294967295&u<<3),f=0;f<v.length;f+=16){for(g=0;16>g;g++)i[g]=v[f+g];for(g=16;79>=g;g++)i[g]=b(i[g-3]^i[g-8]^i[g-14]^i[g-16],1);for(o=j,p=k,q=l,r=m,s=n,g=0;19>=g;g++)t=4294967295&b(o,5)+(p&q|~p&r)+s+i[g]+1518500249,s=r,r=q,q=b(p,30),p=o,o=t;for(g=20;39>=g;g++)t=4294967295&b(o,5)+(p^q^r)+s+i[g]+1859775393,s=r,r=q,q=b(p,30),p=o,o=t;for(g=40;59>=g;g++)t=4294967295&b(o,5)+(p&q|p&r|q&r)+s+i[g]+2400959708,s=r,r=q,q=b(p,30),p=o,o=t;for(g=60;79>=g;g++)t=4294967295&b(o,5)+(p^q^r)+s+i[g]+3395469782,s=r,r=q,q=b(p,30),p=o,o=t;j=4294967295&j+o,k=4294967295&k+p,l=4294967295&l+q,m=4294967295&m+r,n=4294967295&n+s}var t=d(j)+d(k)+d(l)+d(m)+d(n);return t.toLowerCase()}
+function addAlert(message, time){
+    var id = Alerts.insert({message:message});
+    setTimeout(function(){
+        Alerts.remove({_id:id});
+    }, time)
+}
+
+function SHA1(a){function b(a,b){var c=a<<b|a>>>32-b;return c}function d(a){var c,d,b="";for(c=7;c>=0;c--)d=15&a>>>4*c,b+=d.toString(16);return b}function e(a){a=a.replace(/\r\n/g,"\n");for(var b="",c=0;c<a.length;c++){var d=a.charCodeAt(c);128>d?b+=String.fromCharCode(d):d>127&&2048>d?(b+=String.fromCharCode(192|d>>6),b+=String.fromCharCode(128|63&d)):(b+=String.fromCharCode(224|d>>12),b+=String.fromCharCode(128|63&d>>6),b+=String.fromCharCode(128|63&d))}return b}var f,g,h,o,p,q,r,s,t,i=new Array(80),j=1732584193,k=4023233417,l=2562383102,m=271733878,n=3285377520;a=e(a);var u=a.length,v=new Array;for(g=0;u-3>g;g+=4)h=a.charCodeAt(g)<<24|a.charCodeAt(g+1)<<16|a.charCodeAt(g+2)<<8|a.charCodeAt(g+3),v.push(h);switch(u%4){case 0:g=2147483648;break;case 1:g=8388608|a.charCodeAt(u-1)<<24;break;case 2:g=32768|(a.charCodeAt(u-2)<<24|a.charCodeAt(u-1)<<16);break;case 3:g=128|(a.charCodeAt(u-3)<<24|a.charCodeAt(u-2)<<16|a.charCodeAt(u-1)<<8)}for(v.push(g);14!=v.length%16;)v.push(0);for(v.push(u>>>29),v.push(4294967295&u<<3),f=0;f<v.length;f+=16){for(g=0;16>g;g++)i[g]=v[f+g];for(g=16;79>=g;g++)i[g]=b(i[g-3]^i[g-8]^i[g-14]^i[g-16],1);for(o=j,p=k,q=l,r=m,s=n,g=0;19>=g;g++)t=4294967295&b(o,5)+(p&q|~p&r)+s+i[g]+1518500249,s=r,r=q,q=b(p,30),p=o,o=t;for(g=20;39>=g;g++)t=4294967295&b(o,5)+(p^q^r)+s+i[g]+1859775393,s=r,r=q,q=b(p,30),p=o,o=t;for(g=40;59>=g;g++)t=4294967295&b(o,5)+(p&q|p&r|q&r)+s+i[g]+2400959708,s=r,r=q,q=b(p,30),p=o,o=t;for(g=60;79>=g;g++)t=4294967295&b(o,5)+(p^q^r)+s+i[g]+3395469782,s=r,r=q,q=b(p,30),p=o,o=t;j=4294967295&j+o,k=4294967295&k+p,l=4294967295&l+q,m=4294967295&m+r,n=4294967295&n+s}var t=d(j)+d(k)+d(l)+d(m)+d(n);return t.toLowerCase()}s}

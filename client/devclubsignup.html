@@ -1,6 +1,16 @@
 <head>
-    <title>devclubsignup</title>
+    <title>DevClub Signup</title>
 </head>
+
+<template name="alerts">
+    <div id="alerts" style="position:absolute;">
+        {{#each alerts}}
+            <div {{attributes}}>
+                {{message}}
+            </div>
+        {{/each}}
+    </div>
+</template>
 
 <template name="layout">
     <div class="container">
@@ -26,9 +36,9 @@
                 <li><a href="{{pathFor 'home'}}">Home</a></li>
                 <li><a href="{{pathFor 'standings'}}">Standings</a></li>
                 {{#if isLoggedIn}}
-                <li>
+<!--                 <li>
                     <p class="navbar-text">Logged in as {{email}}</p>
-                </li>
+                </li> -->
                 <li>
                     <p class="navbar-text">Your code: <b id="code">{{code}}</b>
                     </p>
