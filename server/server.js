@@ -1,39 +1,45 @@
-Students = new Meteor.Collection('students');
-Confirmation = new Meteor.Collection('confirmation');//we'll secure it after everything's working
+// Students = new Meteor.Collection('students');
+// Confirmation = new Meteor.Collection('confirmation');//we'll secure it after everything's working
 
 
 Meteor.startup(function() {
 
   //process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 	process.env.MAIL_URL = 'smtp://tjdev%40sandbox32437.mailgun.org:tjdev123@smtp.mailgun.org:587';
-    process.env.ROOT_URL = ROOT_URL = 'spell-dallas.codio.io:3000';
-    Meteor.absoluteUrl("",{rootUrl:"http://spell-dallas.codio.io:3000"});
-    console.log(Accounts.verifyEmail)
+    //process.env.ROOT_URL = ROOT_URL = 'spell-dallas.codio.io:3000';
+    //Meteor.absoluteUrl("",{rootUrl:"http://spell-dallas.codio.io:3000"});
+    //console.log(Accounts.emailTemplates)
 });
 
-Confirmation.allow({
-    insert: function(){return true;},
-    update: function(){return false;},
-    remove: function(){return false;}
-});
+// Confirmation.allow({
+//     insert: function(){return true;},
+//     update: function(){return false;},
+//     remove: function(){return false;}
+// });
 
-Meteor.publish('students', function() {//for the record, I wouldn't bother doing a subscribe for this if you're returning everything anyways
-    return Students.find({}, {
-        sort: {
-            created_at: 1
-        }
-    });
-});
+// Meteor.publish('students', function() {//for the record, I wouldn't bother doing a subscribe for this if you're returning everything anyways
+//     return Students.find({}, {
+//         sort: {
+//             created_at: 1
+//         }
+//     });
+// });
 
-Meteor.publish('userData', function(){
-    return Meteor.users.find({},{fields:{email: 1, referralCode: 1, inviteCode: 1}});
+Meteor.publish('singleUser', function(id){
+    return Meteor.users.find(id);
 })
 
-Meteor.publish('confirmation', function(){
-    return Confirmation.find({}, {fields: { email: 1}});
-});
+Meteor.publish('userData', function(){
+    return Meteor.users.find({});
+})
+
 
 Accounts.onCreateUser(function(options, user) {
+    if(!options.profile){
+       options.profile = {}
+    }
+    if (options.profile)
+        user.profile = options.profile;
     return user;
 });
 
@@ -80,10 +86,12 @@ Accounts.validateLoginAttempt(function(type){
 }); 
 
 Meteor.methods({
-    register: function(userObj) {
+    register: function(email, pass, options) {
         
 
-		var id = Accounts.createUser(userObj);
+        var id = Accounts.createUser({email:email, password:pass, profile:options});
+        
+        console.log(options);
         if(id===undefined)
             throw new Meteor.Error(100001, "Email in use");
         console.log(id);
@@ -94,6 +102,8 @@ Meteor.methods({
     test: function(subj,text){
         Email.send({from:"tjdev@sandbox32437.mailgun.org",to:"mjkaufer@gmail.com",subject:subj,text:text});
         return "Winner";
+    },
+    update: function(uid){
+            Meteor.users.update({_id:uid}, {$set:{"emails.0.verified":true}});
     }
 });
-

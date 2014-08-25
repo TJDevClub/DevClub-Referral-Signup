@@ -1,10 +1,10 @@
-Students = new Meteor.Collection('students');
+// Students = new Meteor.Collection('students');
 Alerts = new Meteor.Collection(null);
-Confirmation = new Meteor.Collection('confirmation');
+// Confirmation = new Meteor.Collection('confirmation');
 
-studentsSub = Meteor.subscribe('students');
-confirmationSub = Meteor.subscribe('confirmation');
-
+// studentsSub = Meteor.subscribe('students');
+// confirmationSub = Meteor.subscribe('confirmation');
+Meteor.subscribe('userData');
 var emailReg = /.*\@tjhsst\.edu$/i;
 
 Template.register.events = {
@@ -47,22 +47,19 @@ Template.register.events = {
 
             
             
-			Meteor.call('register',{
-                email: email,
-				password: pass,
-				profile: {
+			Meteor.call('register', email, pass,
+				{
                     created_at: new Date(),
                     firstName: firstName,
                     lastName: lastName,
                     referralCode: referralCode,
                     inviteCode: inviteCode
-				}
-			}, function(err, data){
+				},
+                function(err, data){
                 if(err){
                     alert(err)
                 }
                 
-                console.log(data);
                 
             });
 
@@ -75,9 +72,9 @@ Template.register.events = {
 Template.login.events = {
 	'click input[type=submit]': function(event) {
 		event.preventDefault();
-		var username = $('#username').val();
+		var email = $('#email').val();
 		var password = $('#password').val();
-		Meteor.loginWithPassword(username, password, function(error) {
+		Meteor.loginWithPassword(email, password, function(error) {
 			if (error) {
 				alert(error.reason + 'error');
 			} else {

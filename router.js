@@ -33,8 +33,26 @@ Router.map(function() {
     this.route('home', {
         path: '/'
     });
-
+	this.route('complete');
+    
     this.route('login');
+    
+    this.route('loading');
 
     this.route('register');
+    
+    this.route('verify', {
+        path: '/verify/:verif',
+        waitOn: function(){
+          return Meteor.subscribe('singleUser', this.params.verif);
+        },
+        action: function(){
+			Meteor.call('update', this.params.verif);
+            if(this.ready())
+            	this.redirect('/complete');
+            else
+                this.render('loading');
+            
+        }
+    });
 });
