@@ -41,7 +41,7 @@ Template.register.events = {
         console.log(inviteCode);
         var hashedInvite = SHA1(inviteCode);
 
-		if(/*!emailReg.test(email) || */Meteor.users.findOne({"email.address":email}) !== undefined)
+		if(!emailReg.test(email) || Meteor.users.findOne({"email.address":email}) !== undefined)
 			alert("Please use a valid, unused email (use your TJ email)")
 		else if (!firstName || !lastName || !pass)
 			alert('Please fill in all fields');//we need a prettier way to send alerts
