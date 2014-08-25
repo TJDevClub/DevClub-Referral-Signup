@@ -3,9 +3,9 @@
 </head>
 
 <template name="alerts">
-    <div id="alerts" style="position:absolute;">
+    <div id="alerts" style="position:absolute;left:50%;z-index:100;margin-top:2em;">
         {{#each alerts}}
-            <div {{attributes}}>
+            <div class="alert alert-info" style="position:relative;left:-50%;min-width:20em;text-align:center;">
                 {{message}}
             </div>
         {{/each}}
@@ -14,6 +14,7 @@
 
 <template name="layout">
     <div class="container">
+        {{> alerts}}
         {{> header}}
         {{> yield}}
     </div>
@@ -62,7 +63,7 @@
 </template>
 
 <template name="home">
-    
+   
      <div id="intro">
       
             <div class="intro-text">
@@ -78,7 +79,7 @@
                             <p><span>Interest Form</span></p>
                             <br>
                             <a href="#" class="btn btn-success">Login.</a>
-                            <a href="#" class="btn btn-danger">Sign Up.</a>
+                            <a href="{{pathFor 'register'}}" class="btn btn-danger">Sign Up.</a>
                         </div>
                     </div>
                     </div>
