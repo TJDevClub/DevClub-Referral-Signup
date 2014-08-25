@@ -47,11 +47,15 @@ Router.map(function() {
           return Meteor.subscribe('singleUser', this.params.verif);
         },
         action: function(){
+            if(Meteor.users.findOne(this.params.verif).emails[0].verified === true)//already done
+                this.redirect('/');
+            
 			Meteor.call('update', this.params.verif);
             if(this.ready())
             	this.redirect('/complete');
             else
                 this.render('loading');
+            
             
         }
     });

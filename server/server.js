@@ -115,6 +115,10 @@ Meteor.methods({
         return "Winner";
     },
     update: function(uid){
-            Meteor.users.update({_id:uid}, {$set:{"emails.0.verified":true}});
+        if(Meteor.users.findOne({_id:uid}).emails[0].verified === true)
+            return
+        Meteor.users.update({_id:uid}, {$set:{"emails.0.verified":true}});
+        var referral = Meteor.users.findOne({_id:uid}).referralCode;
+        Meteor.users.update({referralCode: referral}, {$inc:{score:1}});
     }
 });
