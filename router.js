@@ -41,6 +41,8 @@ Router.map(function() {
     this.route('register');
 	
 	this.route('standings');
+	
+// 	this.route('share');
 
     this.route('verify', {
         path: '/verify/:verif',
