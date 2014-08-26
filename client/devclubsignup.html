@@ -47,7 +47,7 @@
                 </li> -->
                 <li>
                     <!--We should have a shar page-->
-                    <a href = "{{pathFor 'share'}}">Your code: <b id="code">{{code}}</b></a>
+                    <!--<a href = "{{pathFor 'share'}}">Your code: <b id="code">{{code}}</b></a>-->
                 </li>
                 <li>
                     <a href="{{pathFor 'standings'}}">Your score: <b id="score">{{score}}</b>
@@ -105,14 +105,14 @@
     <div style = "margin:0 auto; text-align: center">
         <a href="{{pathFor 'login'}}" class="btn btn-success mb">Login</a>
         <a href="{{pathFor 'register'}}" class="btn btn-danger mb">Sign Up</a>
-        <a href = "{{pathFor 'standings'}}" class = "btn btn-info mb" style = "margin-top:10px">Standings</a>
+        <a href = "{{pathFor 'standings'}}" class = "btn btn-info mb">Standings</a>
     </div>
 </template>
 
 <template name="standings">
     
     {{#if isMobile}}
-        <div class="row centered-form" style = "text-align : center; width:75%; margin: 0 auto">
+        <div class="row centered-form" style = "text-align : center; margin: 0 auto">
             <h1>Dev Club Leaderboards!</h1>
             <table class="table table-striped table-hover ">
                 <thead>
@@ -255,19 +255,19 @@
     </div>
 </template>
 
-<template name = "share">
-    <p>Share to facebook</p>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
+<!--<template name = "share">-->
+<!--    <p>Share to facebook</p>-->
+<!--    <div id="fb-root"></div>-->
+<!--    <script>(function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
+!-->
+<!--    <div class="fb-share-button" data-href="http://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website" data-width="200" data-type="button_count"></div>-->
 
-    <div class="fb-share-button" data-href="http://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website" data-width="200" data-type="button_count"></div>
-
-    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="box_count"></div>
-</template>
+<!--    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="box_count"></div>-->
+<!--</template>-->
