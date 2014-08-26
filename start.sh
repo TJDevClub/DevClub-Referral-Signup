@@ -1,1 +1,1 @@
-meteor -p $PORT
+meteor -p $PORT > meteor.log

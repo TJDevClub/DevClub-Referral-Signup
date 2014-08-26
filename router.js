@@ -42,7 +42,7 @@ Router.map(function() {
 	
 	this.route('standings');
 	
-// 	this.route('share');
+	this.route('share');
 
     this.route('verify', {
         path: '/verify/:verif',
