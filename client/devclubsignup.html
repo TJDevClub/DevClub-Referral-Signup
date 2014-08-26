@@ -92,6 +92,8 @@
             </div>
             
      </div>
+     
+     {{> footer}}
 </template>
 
 <template name = "mobileHome"><!--What is this, a trailer park?-->
@@ -129,6 +131,7 @@
             </table>
         </div>
     <!-- Top register people -->
+    {{> footer}}
 </template>
 
 <template name="register">
@@ -181,6 +184,7 @@
             </div>
         </div>
     </div>
+    {{> footer}}
 </template>
 
 <template name="login">
@@ -209,7 +213,7 @@
         </div>
     </div>
     
-
+    {{> footer}}
 </template>
 
 <template name="loading">
@@ -225,17 +229,20 @@
             </div>
         </div>
     </div>
+    {{> footer}}
 </template>
 
 <template name = "share">
     <p>Share it. Don't forget to put your referral code to get points. </p>
 
     
-    
-    
-    
-    
-    
-    
-    
+    {{>footer}}
+</template>
+
+<template name = "footer">
+    <div class="footer navbar-fixed-bottom">
+        <div class = "footer-text">
+            Made with <span class="glyphicon glyphicon-heart-empty"></span> by the TJDev Team: Rushi Shah, Matthew Kaufer, and Sashank Thupakari
+        </div>
+    </div>
 </template>

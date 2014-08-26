@@ -100,3 +100,17 @@ th{
 	margin : 5px;
 	width : 100px;
 }
+
+.footer{
+	height: 4em;
+	text-align:center;
+	background-color: #eee;
+	
+}
+.footer-text{
+	color : #000;
+	text-align:center;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
