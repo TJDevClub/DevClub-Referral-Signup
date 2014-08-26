@@ -47,7 +47,7 @@
                 </li> -->
                 <li>
                     <!--We should have a shar page-->
-                    <a>Your code: <b id="code">{{code}}</b></a>
+                    <a href = "{{pathFor 'share'}}">Your code: <b id="code">{{code}}</b></a>
                 </li>
                 <li>
                     <a href="{{pathFor 'standings'}}">Your score: <b id="score">{{score}}</b>
@@ -253,4 +253,21 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name = "share">
+    <p>Share to facebook</p>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+    <div class="fb-share-button" data-href="http://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website" data-width="200" data-type="button_count"></div>
+
+    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="box_count"></div>
 </template>
