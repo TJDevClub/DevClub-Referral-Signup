@@ -109,7 +109,8 @@ Template.header.email = function() {
 
 Template.header.code = function() {
     return Session.get('code') || "Loading...";
-}
+};
+
 Template.share.link = functio(){
     var link = "http://devclub-referral-signup-c9-mjkaufer.c9.io/register/"+Session.get("code")
     return link;
