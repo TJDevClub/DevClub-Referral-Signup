@@ -27,6 +27,7 @@ Intro
 	width:100%;
 	margin-top:175px;
 	z-index:1000;
+	overflow:hidden;
 }
 #intro .brand {
 	margin-top: 0px;
