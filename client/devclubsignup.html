@@ -224,7 +224,9 @@
 </template>
 
 <template name = "share">
-    <p>Share to facebook</p>
+    <p>Share it. Don't forget to put your referral code to get points. </p>
+    
+    <!--Facebook script-->
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
      var js, fjs = d.getElementsByTagName(s)[0];
@@ -233,8 +235,14 @@
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
+    
+    
+    <!--Twitter script-->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-    <div class="fb-share-button" data-href="http://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website" data-width="200" data-type="button_count"></div>
-
-    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="box_count"></div>
+    <div id = "shareButtons">
+        <div class="fb-share-button" data-href="http://tjdev.meteor.com/standings" data-type="box_count"></div>
+        <div><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tjdev.meteor.com/standings" data-size="large">Tweet</a></div>
+    </div>
+    
 </template>

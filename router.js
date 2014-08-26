@@ -38,7 +38,9 @@ Router.map(function() {
 
     this.route('loading');
 
-    this.route('register');
+    this.route('register', {
+        
+    });
 	
 	this.route('standings');
 	
