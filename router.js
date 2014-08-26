@@ -39,8 +39,18 @@ Router.map(function() {
     this.route('loading');
 
     this.route('register', {
-        
+        path: '/register/:reg',
+        // data: {
+        //     code: this.params.reg || ""
+        // },
+        action: function(){
+            console.log(this.params.reg);
+            this.render('register');
+            document.getElementById('referralCode').value = this.params.reg;
+        }
     });
+    
+    this.route('register');
 	
 	this.route('standings');
 	

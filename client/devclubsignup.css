@@ -81,3 +81,7 @@ th{
 	margin-left:auto;
 	margin-right:auto;
 }
+
+#shareButtons{
+	text-align : center;
+}
