@@ -91,3 +91,12 @@ th{
 	padding : 10px;
 	text-align : center;
 }
+
+.container-center{
+	text-align: center;
+}
+
+.lb{
+	margin : 5px;
+	width : 100px;
+}
