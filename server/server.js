@@ -97,7 +97,7 @@ Meteor.methods({
     test: function(subj, text) {
         Email.send({
             from: "tjdev@sandbox32437.mailgun.org",
-            to: "mjkaufer@gmail.com",
+            to: "rushi.shah@ymail.com",
             subject: subj,
             text: text
         });

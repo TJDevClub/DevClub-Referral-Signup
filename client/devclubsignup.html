@@ -68,15 +68,11 @@
 </template>
 
 <template name="home">
-   {{#if isMobile}}
-<!--Redirect to the mobile template here if possible-->
-        {{>mobileHome}}
-    {{else}}
      <div id="intro">
       
             <div class="intro-text">
-                <div class="container" style = "width:1140px; padding:0px; margin-right:0px">
-                    <div class="row" style = "width:1140px; margin:0px">
+                <div class="container" >
+                    <div class="row">
                     
                         
                     <div class="col-md-12">
@@ -88,7 +84,7 @@
                             <a href="{{pathFor 'login'}}" class="btn btn-success">Login</a>
                             <a href="{{pathFor 'register'}}" class="btn btn-danger">Sign Up</a>
                             <br>
-                            <a href = "{{pathFor 'standings'}}" class = "btn btn-info" style = "margin-top:10px">Standings</a>
+                            <a href = "{{pathFor 'standings'}}" class = "btn btn-info btn-standings" >Standings</a>
                         </div>
                     </div>
                     </div>
@@ -96,8 +92,6 @@
             </div>
             
      </div>
-     {{/if}}
-
 </template>
 
 <template name = "mobileHome">
@@ -111,8 +105,7 @@
 
 <template name="standings">
     
-    {{#if isMobile}}
-        <div class="row centered-form" style = "text-align : center; margin: 0 auto">
+        <div class="container-center">
             <h1>Dev Club Leaderboards!</h1>
             <table class="table table-striped table-hover ">
                 <thead>
@@ -135,31 +128,6 @@
                 </tbody>
             </table>
         </div>
-    {{else}}
-        <div class="row centered-form" style = "text-align : center">
-            <h1>Dev Club Leaderboards!</h1>
-            <table class="table table-striped table-hover ">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each usersWithIndexAndEmail}}
-                    <tr>
-                        <td>{{index}}</td>
-                        <td>{{profile.firstName}} {{profile.lastName}}</td>
-                        <td>{{email}}</td>
-                        <td>{{profile.score}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
     <!-- Top register people -->
 </template>
 
