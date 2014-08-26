@@ -50,13 +50,11 @@ Router.map(function() {
                 reg = this.params.reg;
             else
                 reg = "";
-            console.log("REG: " + reg);
             return {
                 reg: reg
             };
         },
         action: function(){
-            console.log(this.params.reg);
             this.render('register');
             
         }
