@@ -88,7 +88,8 @@ th{
 
 .shareButton{
 	margin: 0 auto;
-	padding : 10px;
+	padding : 5px;
+	width:25%;
 	text-align : center;
 }
 
@@ -113,4 +114,9 @@ th{
 	position: relative;
   	top: 50%;
   	transform: translateY(-50%);
+}
+#share{
+	width : 100%;
+	margin:0 auto;
+	text-align: center;
 }

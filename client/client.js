@@ -182,6 +182,10 @@ UI.registerHelper('usersWithIndexAndEmail', function() {
     return users;
 });
 
+UI.registerHelper("getCode", function(){
+    return Session.get("code");
+});
+
 Template.footer.isMobile = function(){
     var index = navigator.appVersion.indexOf("Mobile");
   	return (index > -1);

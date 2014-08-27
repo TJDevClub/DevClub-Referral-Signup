@@ -233,8 +233,12 @@
 </template>
 
 <template name = "share">
-    <p>Share it. Don't forget to put your referral code to get points. </p>
+    <div id = "share">
+    <h1>Share it. </h1><h2>Don't forget to put your referral code <b>{{getCode}}</b> to get points. </h2>
 
+    <a class = "btn btn-info shareButton" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com" target="_blank" style = "margin:3px"><h3 style = "margin:0">Share on Facebook!</h3></a>
+    <a class = "btn btn-info shareButton" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><h3 style = "margin: 0">Share on Twitter!</h3></a>
+    </div>
     
     {{>footer}}
 </template>
