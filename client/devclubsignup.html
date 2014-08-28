@@ -22,6 +22,7 @@
         {{> alerts}}
         {{> header}}
         {{> yield}}
+        {{> footer}}
     </div>
 </template>
 
@@ -41,7 +42,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{pathFor 'home'}}">Home</a></li>
                 <li><a href="{{pathFor 'standings'}}">Standings</a></li>
-                {{#if isLoggedIn}}
+                {{#if currentUser}}
 <!--                 <li>
                     <p class="navbar-text">Logged in as {{email}}</p>
                 </li> -->
@@ -56,10 +57,14 @@
                 <li><a href="/" class="log-out">Log Out</a>
                 </li>
                 {{else}}
-                <li><a href="{{pathFor 'login'}}">Log In</a>
-                </li>
-                <li><a href="{{pathFor 'register'}}">Register</a>
-                </li>
+                    {{#if loggingIn}}
+                    <li><a>Logging in...</a></li>
+                    {{else}}
+                    <li><a href="{{pathFor 'login'}}">Log In</a>
+                    </li>
+                    <li><a href="{{pathFor 'register'}}">Register</a>
+                    </li>
+                    {{/if}}
                 {{/if}}
 
             </ul>
@@ -81,9 +86,17 @@
                             <h1><a>TJ DEV CLUB</a></h1>
                             <div class="line-spacer"></div>
                             <p><span>Interest Form</span></p>
-                            <a href="{{pathFor 'login'}}" class="btn btn-success lb">Login</a>
-                            <a href="{{pathFor 'register'}}" class="btn btn-danger lb">Sign Up</a>
-                            <br>
+                            {{#if currentUser}}
+                            <p><span>Hey {{currentUser.profile.firstName}}</span></p>
+                            {{else}}
+                                {{#if loggingIn}}
+                                <p><span>Logging in...</span></p>
+                                {{else}}
+                                <a href="{{pathFor 'login'}}" class="btn btn-success lb">Login</a>
+                                <a href="{{pathFor 'register'}}" class="btn btn-danger lb">Sign Up</a>
+                                <br>
+                                {{/if}}
+                            {{/if}}
                             <a href = "{{pathFor 'standings'}}" class = "btn btn-info btn-standings lb" >Standings</a>
                         </div>
                     </div>
@@ -93,14 +106,21 @@
             
      </div>
      
-     {{> footer}}
 </template>
 
 <template name = "mobileHome"><!--What is this, a trailer park?-->
     <!--<p>You're on mobile right now</p>-->
     <div style = "margin:0 auto; text-align: center">
-        <a href="{{pathFor 'login'}}" class="btn btn-success mb">Login</a>
-        <a href="{{pathFor 'register'}}" class="btn btn-danger mb">Sign Up</a>
+        {{#if currentUser}}
+        <p><span>Hey {{currentUser.profile.firstName}}</span></p>
+        {{else}}
+            {{#if loggingIn}}
+            <p><span>Logging in...</span></p>
+            {{else}}
+            <a href="{{pathFor 'login'}}" class="btn btn-success mb">Login</a>
+            <a href="{{pathFor 'register'}}" class="btn btn-danger mb">Sign Up</a>
+            {{/if}}
+        {{/if}}
         <a href = "{{pathFor 'standings'}}" class = "btn btn-info mb">Standings</a>
     </div>
 </template>
@@ -131,7 +151,6 @@
             </table>
         </div>
     <!-- Top register people -->
-    {{> footer}}
 </template>
 
 <template name="register">
@@ -184,7 +203,6 @@
             </div>
         </div>
     </div>
-    {{> footer}}
 </template>
 
 <template name="login">
@@ -213,7 +231,6 @@
         </div>
     </div>
     
-    {{> footer}}
 </template>
 
 <template name="loading">
@@ -229,18 +246,16 @@
             </div>
         </div>
     </div>
-    {{> footer}}
 </template>
 
 <template name = "share">
     <div id = "share">
     <h1>Share it. </h1><h2>Don't forget to put your referral code <b>{{getCode}}</b> to get points. </h2>
-
+    {{! if we did this right, it'll have the ref code incorporated into the shared url, bc I added support for that}}
     <a class = "btn btn-info shareButton" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com" target="_blank" style = "margin:3px"><h3 style = "margin:0">Share on Facebook!</h3></a>
     <a class = "btn btn-info shareButton" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><h3 style = "margin: 0">Share on Twitter!</h3></a>
     </div>
     
-    {{>footer}}
 </template>
 
 <template name = "footer">

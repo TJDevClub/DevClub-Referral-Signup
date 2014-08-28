@@ -112,8 +112,13 @@ Template.header.code = function() {
 };
 
 
+UI.registerHelper('or', function(a,b){
+    return a||b;
+});
 
-
+UI.registerHelper('not', function(arg){
+    return !arg;
+})
 
 
 Template.header.score = function() {
