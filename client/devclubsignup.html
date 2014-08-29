@@ -132,10 +132,10 @@
             <table class="table table-striped table-hover ">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Score</th>
+                        <th style = "text-align:center;">#</th>
+                        <th style = "text-align:center;">Name</th>
+                        <th style = "text-align:center;">Email</th>
+                        <th style = "text-align:center;">Score</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -252,6 +252,7 @@
     <div id = "share">
     <h1>Share it. </h1><h2>Don't forget to put your referral code <b>{{getCode}}</b> to get points. </h2>
     {{! if we did this right, it'll have the ref code incorporated into the shared url, bc I added support for that}}
+    {{! apparently we didn't do it right because it doesn't do that}}
     <a class = "btn btn-info shareButton" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com" target="_blank" style = "margin:3px"><h3 style = "margin:0">Share on Facebook!</h3></a>
     <a class = "btn btn-info shareButton" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><h3 style = "margin: 0">Share on Twitter!</h3></a>
     </div>
