@@ -254,8 +254,9 @@
     <h1>Share it. </h1><h2>Don't forget to put your referral code <b>{{getCode}}</b> to get points. </h2>
     {{! if we did this right, it'll have the ref code incorporated into the shared url, bc I added support for that}}
     {{! apparently we didn't do it right because it doesn't do that}}
-    <a class = "btn btn-info shareButton" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com" target="_blank" style = "margin:3px"><h3 style = "margin:0">Share on Facebook!</h3></a>
-    <a class = "btn btn-info shareButton" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><h3 style = "margin: 0">Share on Twitter!</h3></a>
+    {{! I think I fixed it}}
+    <a class = "btn btn-info shareButton" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com%2Fregister%2F{{getCode}}" target="_blank" style = "margin:3px"><h3 style = "margin:0">Share on Facebook!</h3></a>
+    <a class = "btn btn-info shareButton" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com%2Fregister%2F{{getCode}}&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><h3 style = "margin: 0">Share on Twitter!</h3></a>
     </div>
     
 </template>
@@ -270,9 +271,9 @@
     {{else}}
         <div class="footer navbar-fixed-bottom">
             <div class = "footer-text">
-                <a class = "btn btn-info" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com" target="_blank" style = "margin:3px"><span class = "glyphicon glyphicon-thumbs-up"></span></a>
+                <a class = "btn btn-info" href="https://www.facebook.com/sharer/sharer.php?u=tjdev.meteor.com%2Fregister%2F{{getCode}}" target="_blank" style = "margin:3px"><span class = "glyphicon glyphicon-thumbs-up"></span></a>
                 Made with <span class="glyphicon glyphicon-heart-empty"></span> by the TJDev Team: Sashank Thupukari, Matthew Kaufer, and Rushi Shah
-                <a class = "btn btn-info" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><span class = "glyphicon glyphicon-edit"></span></a>
+                <a class = "btn btn-info" href="http://twitter.com/share?url=http%3A%2F%2Ftjdev.meteor.com%2Fregister%2F{{getCode}}&text=Check%20out%20TJDevClub's%20new%20site:" target="_blank" style = "margin:3px"><span class = "glyphicon glyphicon-edit"></span></a>
             </div>
         </div>
     {{/if}}
