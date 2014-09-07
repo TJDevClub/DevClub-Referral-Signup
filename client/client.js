@@ -64,6 +64,9 @@ Template.register.events = {
             "profile.hashedInvite": SHA1(referralCode)
         }))
             addAlert("Invalid referral!");
+        else if (firstName.length >= 13 || lastName.length >=13){
+            addAlert("Your name is too long: please limit to 13 characters");
+        }
         else {
             addAlert("You've successfully registered. Go to your email to verify your account to start getting points!");
             //			 Confirmation.insert({
