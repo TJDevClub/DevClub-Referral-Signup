@@ -191,7 +191,12 @@ UI.registerHelper('usersWithIndexAndEmail', function() {
 });
 
 UI.registerHelper("getCode", function(){
-    return Session.get("code");
+    if(Session.get("code")!="Loading..."){
+        return Session.get("code");
+    }
+    else{
+        return "";
+    }
 });
 
 Template.footer.isMobile = function(){
