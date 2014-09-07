@@ -157,7 +157,9 @@ Template.header.user = function() {
 
 Template.header.events({
     'click .log-out': function() {
+        Session.set("code", "Loading...");
         Meteor.logout();
+        
     }
 });
 
