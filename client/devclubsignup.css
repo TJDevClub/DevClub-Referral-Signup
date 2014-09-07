@@ -122,7 +122,11 @@ th{
 }
 
 .brand .logo {
-	width: 40%;
+	width: 45%;
+}
+
+.brand .logom{
+	width: 85%;
 }
 
 .btn h3 {

@@ -83,7 +83,11 @@
                     <div class="col-md-12">
             
                         <div class="brand">
-                             <img class="logo" src="DCL4.png"/>
+                            {{#if isMobile}}
+                                <img class = "logom" src = "DCL4.png"/>
+                            {{else}}
+                                 <img class="logo" src="DCL4.png"/>
+                             {{/if}}
 
                             <div class="line-spacer"></div>
                             <p><span>Interest Form</span></p>
